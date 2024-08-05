@@ -1,7 +1,7 @@
-import { View } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native';
-import { CardHorizontalFood } from './food';
+import { CardHorizontalFood } from './food'
+
 
 export interface FoodProps {
     id: string;
@@ -15,24 +15,24 @@ export interface FoodProps {
 }
 
 export function TrendingFoods() {
-
     const [foods, setFoods] = useState<FoodProps[]>([])
 
     useEffect(() => {
         async function getFoods() {
-            const response = await fetch("http://192.168.10.102/3000/foods")
+            const response = await fetch("http://192.168.10.102:3000/foods")
             const data = await response.json()
             setFoods(data);
         }
+
         getFoods();
     }, [])
 
     return (
         <FlatList
             data={foods}
-            renderItem={ ({ item }) => <CardHorizontalFood food={item} /> }
+            renderItem={({ item }) => <CardHorizontalFood food={item} />}
             horizontal={true}
-            contentContainerStyle={{ gap:14, paddingLeft:16, paddingRight: 16}}
+            contentContainerStyle={{ gap: 14, paddingLeft: 16, paddingRight: 16 }}
             showsHorizontalScrollIndicator={false}
         />
     );
